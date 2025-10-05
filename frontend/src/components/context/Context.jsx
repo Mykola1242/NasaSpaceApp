@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, use } from "react";
 import axios from "axios";
 
 export const Context = createContext();
@@ -20,6 +20,8 @@ export const ContextProvider = ({ children }) => {
 
     const [showResult, setShowResult] = useState(false);
     const [showForm, setShowForm] = useState(true);
+
+    const [dangerousAsteroids, setDangerousAsteroids] = useState([]);
 
     const API_URL = "http://localhost:8000";
 
@@ -83,6 +85,18 @@ export const ContextProvider = ({ children }) => {
         }
     }, [damageData]);
 
+    useEffect(() => {
+        fetch(`${API_URL}/dangerous_asteroids`)
+            .then(res => res.json())
+            .then(data => {
+                console.log('Fetched dangerous asteroids:', data);
+                setDangerousAsteroids(data.asteroids);
+            })
+            .catch(error => {
+                console.error('Error fetching dangerous asteroids:', error);
+            });
+    }, []);
+
     return (
         <Context.Provider value={{
             API_URL,
@@ -104,6 +118,9 @@ export const ContextProvider = ({ children }) => {
 
             showForm,
             setShowForm,
+
+            dangerousAsteroids,
+            setDangerousAsteroids,
 
             formSubmitHandler,
             runSimulation,

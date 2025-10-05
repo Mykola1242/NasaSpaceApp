@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from backend.nasa_api import NasaSentryClient
-from backend.models.ImpactSimulation import ImpactSimulation
+from nasa_api import NasaSentryClient
+from models.ImpactSimulation import ImpactSimulation
 
 # -> CORS
 from fastapi.middleware.cors import CORSMiddleware       
