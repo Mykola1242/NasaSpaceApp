@@ -1,11 +1,15 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+
+from backend.nasa_api import NasaSentryClient
 from models.ImpactSimulation import ImpactSimulation
 
 # -> CORS
 from fastapi.middleware.cors import CORSMiddleware       
 
 app = FastAPI(title="Asteroid Impact Simulator 🚀")
+
+client = NasaSentryClient()
 
 # Підключаємо папку static як статичні файли
 # app.mount("/", StaticFiles(directory="static", html=True), name="static")
@@ -45,4 +49,10 @@ def simulate(impact: ImpactSimulation):
     """
     result = impact.simulate_impact()
     return result
+
+@app.get("/dangerous_asteroids")
+def get_dangerous_asteroids(years_ahead: int = 20, top_n: int = 10):
+    asteroids = client.filter_and_sort(years_ahead=years_ahead, top_n=top_n)
+    return {"count": len(asteroids), "asteroids": asteroids}
+
 

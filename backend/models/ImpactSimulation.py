@@ -2,8 +2,8 @@ from pydantic import BaseModel
 from math import sin, radians
 
 
-from models.Asteroid import Asteroid
-from models.Earth import Earth
+from backend.models.Asteroid import Asteroid
+from backend.models.Earth import Earth
 
 def clamp(x: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, x))
