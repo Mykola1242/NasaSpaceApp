@@ -77,7 +77,10 @@ class ImpactSimulation(BaseModel):
         # Кут треба перевести у радіани
 
         f_used = self.f_from_angle_and_density()
-        effective_energy = f_used * energy * (sin(radians(self.impact_angle))**2)
+
+        f_used = 1.
+
+        effective_energy = f_used * energy * sin(radians(self.impact_angle))
         tnt_tons = effective_energy / 4.184e9
         return tnt_tons
 
