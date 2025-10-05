@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { Context } from './context/Context';
 
 const DataForm = () => {
-    const { formSubmitHandler, formChangeHandler, setZones } = useContext(Context);
+    const { formSubmitHandler, setZones } = useContext(Context);
 
     return (
         <div>
@@ -17,20 +17,17 @@ const DataForm = () => {
                         type="number"
                         placeholder="Enter diameter in meters"
                         name="diameter"
-                        onChange={formChangeHandler}
                         required
                     />
                 </Form.Group>
             
-                <Form.Group className="mb-3" controlId="density">
-                    <Form.Label>Density (kg/m³)</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="Enter density in kg/m³"
-                        name="density"
-                        onChange={formChangeHandler}
-                        required
-                    />
+                <Form.Group className="mb-3" controlId="composition">
+                    <Form.Label>Composition</Form.Label>
+                    <Form.Select aria-label="Default select example" name="composition">
+                        <option value="1">rocky</option>
+                        <option value="2">metallic</option>
+                        <option value="3">icy</option>
+                    </Form.Select>
                 </Form.Group>
             
                 <Form.Group className="mb-3" controlId="velocity">
@@ -39,7 +36,16 @@ const DataForm = () => {
                         type="number"
                         placeholder="Enter velocity in km/s"
                         name="velocity"
-                        onChange={formChangeHandler}
+                        required
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="distance_to_impact">
+                    <Form.Label>Distance to Impact (km)</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Enter distance to impact in km"
+                        name="distance_to_impact"
                         required
                     />
                 </Form.Group>
@@ -50,7 +56,6 @@ const DataForm = () => {
                         type="number"
                         placeholder="Enter entry angle in degrees"
                         name="angle"
-                        onChange={formChangeHandler}
                         required
                     />
                 </Form.Group>
